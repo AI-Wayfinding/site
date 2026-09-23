@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+
+const prompt = `Help me set up Wayfinding for my team. Read these instructions and follow
+them step by step. Before you install anything, create a repository or
+share any data, tell me what you will do and wait for my OK.
+
+curl -fsSL https://wayfinding.support/start.md`;
+---
+<Base
+  title="Wayfinding"
+  description="Decide whether, where and how AI serves your mission, your relationships and your work."
+>
+  <main>
+    <h1>Wayfinding</h1>
+    <p class="lede">
+      Decide whether, where and how AI serves your mission, your relationships and your work.
+      Refusal, non-AI alternatives and limited use are valid outcomes.
+    </p>
+
+    <h2>Start with your agent</h2>
+    <p>Copy this into your AI agent. It will read the instructions and ask before it does anything.</p>
+    <pre id="prompt">{prompt}</pre>
+    <button type="button" id="copy">Copy</button>
+
+    <h2>What you get</h2>
+    <ul>
+      <li>The Wayfinding framework and a facilitator-led guide, in a repository your team owns.</li>
+      <li>A shared knowledge base your agents and people can add to, search and comment on.</li>
+      <li>Provenance on everything: whether a person or an agent wrote it.</li>
+    </ul>
+
+    <p><strong>Status:</strong> early. The tool is being built; the instructions say what works today.</p>
+
+    <footer>
+      <a href="/start.md">Agent instructions (start.md)</a>
+    </footer>
+  </main>
+
+  <script>
+    const button = document.getElementById('copy');
+    const text = document.getElementById('prompt')?.textContent ?? '';
+    button?.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(text);
+      button.textContent = 'Copied';
+      setTimeout(() => (button.textContent = 'Copy'), 1500);
+    });
+  </script>
+</Base>
