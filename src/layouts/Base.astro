@@ -1,4 +1,12 @@
 ---
+import '@fontsource/instrument-serif/latin-400.css';
+import '@fontsource/instrument-serif/latin-400-italic.css';
+import '@fontsource/ibm-plex-sans/latin-400.css';
+import '@fontsource/ibm-plex-sans/latin-500.css';
+import '@fontsource/ibm-plex-sans/latin-600.css';
+import '@fontsource/ibm-plex-mono/latin-400.css';
+import '@fontsource/ibm-plex-mono/latin-500.css';
+
 interface Props {
   title: string;
   description: string;
@@ -11,17 +19,53 @@ const { title, description } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/wayfinding-mark.svg" />
     <title>{title}</title>
     <style is:global>
-      :root { color-scheme: light dark; font-family: system-ui, sans-serif; line-height: 1.55; }
-      body { max-width: 42rem; margin: 3rem auto; padding: 0 1.25rem; }
-      h1 { font-size: 1.9rem; margin-bottom: 0.25rem; }
-      .lede { font-size: 1.15rem; opacity: 0.85; margin-top: 0; }
-      pre { padding: 1rem; border-radius: 0.5rem; overflow-x: auto; white-space: pre-wrap;
-            background: color-mix(in srgb, currentColor 8%, transparent); }
-      button { font: inherit; padding: 0.4rem 0.9rem; border-radius: 0.4rem; cursor: pointer; }
-      footer { margin-top: 3rem; font-size: 0.9rem; opacity: 0.7; }
-      a { color: inherit; }
+      :root {
+        --paper: #F4F2EE;
+        --paper-light: #FAFAF8;
+        --ink: #1B2F4B;
+        --muted: #4A5566;
+        --accent: #1F7A78;
+        --accent-on-navy: #7FD1CB;
+        --grid: #E3E6E6;
+        --hairline: #C9CDD2;
+        --dash: #9AA3AD;
+        --spectrum-red: #C8431F;
+        --spectrum-orange: #E07A1F;
+        --spectrum-yellow: #D9A91A;
+        --spectrum-green: #4E9A2E;
+        --spectrum-teal: #1A9A9A;
+        --spectrum-blue: #3569C4;
+        --spectrum-indigo: #6B55C9;
+        --spectrum-purple: #9B4DBF;
+        --quote-tension: #B23A2A;
+        --quote-boundary: #A55200;
+        --quote-challenge: #7D6200;
+        --quote-learning: #2F7A1F;
+        --quote-practice: #1F6FA8;
+        --quote-success: #6B3FA0;
+        --font-display: 'Instrument Serif', serif;
+        --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+        --font-mono: 'IBM Plex Mono', monospace;
+        color: var(--ink);
+        font-family: var(--font-body);
+        -webkit-font-smoothing: antialiased;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--paper);
+        background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+        background-size: 64px 64px;
+        background-position: -1px -1px;
+      }
+      a { color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+      a:hover { color: var(--accent); }
+      ::selection { background: var(--accent); color: var(--paper); }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     </style>
   </head>
   <body>
