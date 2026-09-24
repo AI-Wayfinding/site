@@ -15,7 +15,7 @@
   "ratelimits": [
     { "name": "CONTACT_LIMIT", "namespace_id": "4101", "simple": { "limit": 5, "period": 60 } }
   ],
-  "vars": { "TURNSTILE_SITE_KEY": "" },
+  "vars": { "TURNSTILE_SITE_KEY": "0x4AAAAAAFBzQ035TwErnUdh" },
   "routes": [
     { "pattern": "wayfinding.support", "custom_domain": true }
   ],

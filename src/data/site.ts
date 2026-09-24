@@ -1,5 +1,5 @@
 // Content transcribed from the design handoff's DCLogic class.
-export const turnstileSiteKey = '';
+export const turnstileSiteKey = '0x4AAAAAAFBzQ035TwErnUdh';
 export const prompt = `I'd like to start Wayfinding. Read these instructions and guide me
 step by step. Before you create any files, install anything or share
 any data, tell me what you will do and wait for my OK.
