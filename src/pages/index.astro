@@ -10,11 +10,12 @@ const { showPrinciples = true } = Astro.props;
   description="Decide whether, where and how AI serves your mission, your relationships and your work."
 >
   <header class="site-header wrap">
-    <a class="brand" href="#top"><img src="/wayfinding-mark.svg" alt="" width="30" height="30" /><span>Wayfinding</span></a>
+    <a class="brand" href="#top"><img src="/wayfinding-mark.svg" alt="" width="30" height="30" /><span>AI Wayfinding</span></a>
     <nav aria-label="Main navigation">
       <a href="#triangle">The Triangle</a>
       <a href="#exercise">How it works</a>
       <a href="#outcomes">Outcomes</a>
+      <a href="#wayfinders">Join the wayfinders</a>
       <a class="nav-start" href="#start">Start with your agent →</a>
     </nav>
   </header>
@@ -150,6 +151,23 @@ const { showPrinciples = true } = Astro.props;
       </div>
     </section>}
 
+    <section id="wayfinders" class="wayfinders-section" aria-labelledby="wayfinders-heading">
+      <div class="wrap wayfinders-grid">
+        <div class="stack">
+          <p class="eyebrow accent">The network</p>
+          <h2 id="wayfinders-heading">Become an AI wayfinder</h2>
+        </div>
+        <div class="stack wayfinders-copy">
+          <p class="body-copy">Wayfinders are people helping their teams decide what AI is for, and what it isn't. Start with your own interview, interview a teammate, then share what you learn with other wayfinders.</p>
+          <p class="body-copy">The peer network is just starting. Follow along on GitHub to hear when it opens.</p>
+          <div class="button-row">
+            <a class="button button-primary" href="#start">Start your interview</a>
+            <a class="button button-outline" href="https://github.com/AI-Wayfinding/getting-started">Join other wayfinders ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="partners" class="partners-section wrap" aria-label="Partnering organisations">
       <p class="eyebrow accent">Partnering organisations</p>
       <div class="partner-grid">
@@ -161,7 +179,7 @@ const { showPrinciples = true } = Astro.props;
   </main>
   <footer class="site-footer wrap">
     <span>Wayfinding is how you move when the destination is uncertain.</span>
-    <nav aria-label="Footer"><a href="https://github.com/AI-Wayfinding/getting-started">Agent instructions</a><span>Facilitator guide</span><span>Improve Wayfinding</span></nav>
+    <nav aria-label="Footer"><a href="https://github.com/AI-Wayfinding/getting-started">Agent instructions</a><a href="#wayfinders">Become a wayfinder</a><span>Facilitator guide</span><span>Improve Wayfinding</span></nav>
   </footer>
 
   <script>
@@ -365,6 +383,9 @@ const { showPrinciples = true } = Astro.props;
   .stance-section li > span:first-child { font: 13px var(--font-mono); }
   .stance-section li > span:last-child { font: 28px/1.15 var(--font-display); }
 
+  .wayfinders-section { border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); background: var(--paper-light, #FAFAF8); }
+  .wayfinders-grid { padding-block: 88px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 32px 56px; align-items: start; }
+  .wayfinders-copy { gap: 18px; }
   .partners-section { padding-block: 88px 72px; display: flex; flex-direction: column; gap: 36px; }
   .partner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); border-top: 1px solid var(--ink); border-left: 1px solid var(--ink); }
   .partner-card { display: flex; flex-direction: column; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); background: var(--paper-light); text-decoration: none; }
