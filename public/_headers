@@ -1,3 +1,19 @@
 /start.md
   Content-Type: text/markdown; charset=utf-8
   Cache-Control: public, max-age=300
+
+/interview.md
+  Content-Type: text/markdown; charset=utf-8
+  Cache-Control: public, max-age=300
+
+/interview-a-teammate.md
+  Content-Type: text/markdown; charset=utf-8
+  Cache-Control: public, max-age=300
+
+/install.md
+  Content-Type: text/markdown; charset=utf-8
+  Cache-Control: public, max-age=300
+
+/share.md
+  Content-Type: text/markdown; charset=utf-8
+  Cache-Control: public, max-age=300
