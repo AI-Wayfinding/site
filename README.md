@@ -3,7 +3,7 @@
 Static Astro site for `wayfinding.support`, deployed as a Cloudflare Worker with static assets.
 
 - `src/pages/index.astro`: landing page with the paste-to-agent block.
-- `public/start.md`: the instructions an agent fetches with `curl`. Served as `text/markdown` via `public/_headers`.
+- The agent instructions live in the public repository [AI-Wayfinding/getting-started](https://github.com/AI-Wayfinding/getting-started). The copy block points agents straight at its raw `instructions/start.md`; this site keeps no copy.
 - Framework text is not published here until it is cleared; see [framework/SOURCE-STATUS.md](../framework/SOURCE-STATUS.md).
 - Published with Dan's approval on 2026-09-23: the landing page's framework headings and short phrases (the Triangle, Discover/Evaluate/Execute, the three stages, the seven principle titles) and the 20 interview quotes with their role-only credits in `src/data/site.ts`. The full framework text is still not published.
 

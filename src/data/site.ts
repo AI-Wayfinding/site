@@ -3,7 +3,7 @@ export const prompt = `I'd like to start Wayfinding. Read these instructions and
 step by step. Before you create any files, install anything or share
 any data, tell me what you will do and wait for my OK.
 
-curl -fsSL https://wayfinding.support/start.md`;
+curl -fsSL https://raw.githubusercontent.com/AI-Wayfinding/getting-started/main/instructions/start.md`;
 
 export const voiceSets = [
   { tag: 'Tension', color: '#B23A2A', items: [
