@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { prompt, voiceSets, modes, loop, stages, outcomes, principles } from '../data/site';
+import { prompt, voiceSets, modes, loop, stages, outcomes, principles, turnstileSiteKey } from '../data/site';
 
 interface Props { showPrinciples?: boolean; }
 const { showPrinciples = true } = Astro.props;
@@ -67,7 +67,7 @@ const { showPrinciples = true } = Astro.props;
       <div id="facilitator" class="wrap facilitator-wrap">
         <div class="facilitator-box">
           <div class="stack small-stack"><p class="eyebrow">Or start with a person</p><h3>Let us be your guide</h3></div>
-          <div class="stack facilitator-copy"><p class="body-copy">No agent needed. A facilitator from one of our partner organisations can lead your team through listening, weighing options and a first decision.</p><a class="button button-primary" href="#partners">Meet the partners →</a></div>
+          <div class="stack facilitator-copy"><p class="body-copy">No agent needed. A facilitator from one of our partner organisations can lead your team through listening, weighing options and a first decision.</p><button class="button button-primary contact-trigger" type="button" data-contact-topic="facilitator">Contact us →</button></div>
         </div>
       </div>
     </section>
@@ -159,10 +159,10 @@ const { showPrinciples = true } = Astro.props;
         </div>
         <div class="stack wayfinders-copy">
           <p class="body-copy">Wayfinders are people helping their teams decide what AI is for, and what it isn't. Start with your own interview, interview a teammate, then share what you learn with other wayfinders.</p>
-          <p class="body-copy">The peer network is just starting. Follow along on GitHub to hear when it opens.</p>
+          <p class="body-copy">The peer network is just starting. Tell us you'd like to join and we'll be in touch.</p>
           <div class="button-row">
             <a class="button button-primary" href="#start">Start your interview</a>
-            <a class="button button-outline" href="https://github.com/AI-Wayfinding/getting-started">Join other wayfinders ↗</a>
+            <button class="button button-outline contact-trigger" type="button" data-contact-topic="join">Join other wayfinders →</button>
           </div>
         </div>
       </div>
@@ -177,6 +177,39 @@ const { showPrinciples = true } = Astro.props;
       </div>
     </section>
   </main>
+
+  <dialog id="contact-dialog" class="contact-dialog" aria-labelledby="contact-heading" data-site-key={turnstileSiteKey}>
+    <div class="contact-content">
+      <div class="contact-header">
+        <div><p class="eyebrow accent">Get in touch</p><h2 id="contact-heading">Contact us</h2></div>
+        <button id="contact-close" class="contact-close" type="button" aria-label="Close contact form">×</button>
+      </div>
+      <form id="contact-form" class="contact-form">
+        <label for="contact-name">Name</label>
+        <input id="contact-name" name="name" type="text" required maxlength="100" autocomplete="name" />
+        <label for="contact-email">Email</label>
+        <input id="contact-email" name="email" type="email" required maxlength="254" autocomplete="email" />
+        <label for="contact-topic">Topic</label>
+        <select id="contact-topic" name="topic" required>
+          <option value="join">Join the network</option>
+          <option value="facilitator">Work with a facilitator</option>
+          <option value="share">Share a lesson</option>
+          <option value="other">Something else</option>
+        </select>
+        <label for="contact-message">Message</label>
+        <textarea id="contact-message" name="message" rows="5" required maxlength="4000"></textarea>
+        <div class="contact-honeypot" aria-hidden="true">
+          <label for="contact-website">Website</label>
+          <input id="contact-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        {turnstileSiteKey ? <div id="contact-turnstile"></div> : <p class="contact-config-note">Contact form not configured yet</p>}
+        <button id="contact-submit" class="button button-primary contact-submit" type="submit" disabled>Send message</button>
+        <p id="contact-status" class="contact-status" role="status" aria-live="polite"></p>
+      </form>
+      <p class="contact-privacy">We use your details only to reply. Nothing is stored on this site.</p>
+    </div>
+  </dialog>
+
   <footer class="site-footer wrap">
     <span>Wayfinding is how you move when the destination is uncertain.</span>
     <nav aria-label="Footer"><a href="https://github.com/AI-Wayfinding/getting-started">Agent instructions</a><a href="#wayfinders">Become a wayfinder</a><span>Facilitator guide</span><span>Improve Wayfinding</span></nav>
@@ -236,6 +269,94 @@ const { showPrinciples = true } = Astro.props;
       }
       syncRotation();
       reducedMotion.addEventListener('change', syncRotation);
+    }
+
+    interface TurnstileApi {
+      render(container: HTMLElement, options: { sitekey: string }): string;
+      getResponse(widgetId: string): string;
+      reset(widgetId: string): void;
+    }
+    const contactDialog = document.querySelector<HTMLDialogElement>('#contact-dialog');
+    const contactForm = document.querySelector<HTMLFormElement>('#contact-form');
+    const contactTopic = document.querySelector<HTMLSelectElement>('#contact-topic');
+    const contactStatus = document.querySelector<HTMLElement>('#contact-status');
+    const contactSubmit = document.querySelector<HTMLButtonElement>('#contact-submit');
+    const widgetContainer = document.querySelector<HTMLElement>('#contact-turnstile');
+    if (contactDialog && contactForm && contactTopic && contactStatus && contactSubmit) {
+      const siteKey = contactDialog.dataset.siteKey ?? '';
+      contactSubmit.disabled = !siteKey;
+      const turnstile = () => (window as Window & { turnstile?: TurnstileApi }).turnstile;
+      let opener: HTMLButtonElement | undefined;
+      let widgetId: string | undefined;
+      let loading: Promise<void> | undefined;
+
+      async function loadWidget() {
+        if (!siteKey || !widgetContainer || !contactDialog || !contactStatus || widgetId) return;
+        contactStatus.textContent = 'Loading verification…';
+        if (!loading) {
+          loading = new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+            script.async = true;
+            script.onload = () => turnstile() ? resolve() : reject(new Error('Verification unavailable'));
+            script.onerror = () => { script.remove(); reject(new Error('Verification unavailable')); };
+            document.head.append(script);
+          });
+        }
+        try {
+          await loading;
+          if (contactDialog.open && !widgetId) widgetId = turnstile()?.render(widgetContainer, { sitekey: siteKey });
+          contactStatus.textContent = '';
+        } catch {
+          loading = undefined;
+          contactStatus.textContent = 'Verification could not load. Please try again.';
+        }
+      }
+
+      document.querySelectorAll<HTMLButtonElement>('[data-contact-topic]').forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+          opener = trigger;
+          contactStatus.textContent = '';
+          contactTopic.value = trigger.dataset.contactTopic ?? 'other';
+          contactDialog.showModal();
+          void loadWidget();
+        });
+      });
+      document.querySelector('#contact-close')?.addEventListener('click', () => contactDialog.close());
+      contactDialog.addEventListener('close', () => opener?.focus());
+
+      contactForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const token = widgetId ? turnstile()?.getResponse(widgetId) : '';
+        if (!token) {
+          contactStatus.textContent = 'Please complete verification before sending.';
+          if (widgetId) turnstile()?.reset(widgetId);
+          return;
+        }
+        contactSubmit.disabled = true;
+        contactStatus.textContent = '';
+        const fields = new FormData(contactForm);
+        try {
+          const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: fields.get('name'), email: fields.get('email'), topic: fields.get('topic'),
+              message: fields.get('message'), website: fields.get('website'), turnstileToken: token,
+            }),
+          });
+          const result: unknown = await response.json();
+          if (!response.ok || typeof result !== 'object' || result === null || !('ok' in result) || result.ok !== true) throw new Error('Contact failed');
+          contactForm.reset();
+          if (widgetId) turnstile()?.reset(widgetId);
+          contactStatus.textContent = "Thanks. We'll be in touch.";
+        } catch {
+          contactStatus.textContent = 'We could not send your message. Please try again.';
+          if (widgetId) turnstile()?.reset(widgetId);
+        } finally {
+          contactSubmit.disabled = false;
+        }
+      });
     }
   </script>
 </Base>
@@ -306,6 +427,28 @@ const { showPrinciples = true } = Astro.props;
   .small-stack { gap: 12px; }
   .facilitator-box h3 { font-size: 40px; line-height: 1.05; }
   .facilitator-copy { gap: 18px; align-items: flex-start; }
+  .contact-trigger, .contact-submit { font-family: inherit; cursor: pointer; border-radius: 0; }
+  .button-primary.contact-trigger, .contact-submit { border: 0; }
+  .button-outline.contact-trigger { background: transparent; color: var(--ink); }
+  .button-outline.contact-trigger:hover { color: var(--accent); }
+
+  .contact-dialog { width: min(92vw, 600px); max-height: 90vh; padding: 0; border: 1px solid var(--ink); border-radius: 0; background: var(--paper); color: var(--ink); box-shadow: none; }
+  .contact-dialog::backdrop { background: rgb(27 47 75 / 65%); }
+  .contact-content { padding: 32px; }
+  .contact-header { display: flex; justify-content: space-between; gap: 16px; align-items: start; padding-bottom: 20px; border-bottom: 1px solid var(--ink); }
+  .contact-header h2 { margin-top: 8px; font-size: 44px; }
+  .contact-close { border: 0; background: transparent; color: var(--ink); font: 32px/1 var(--font-body); cursor: pointer; }
+  .contact-form { display: flex; flex-direction: column; gap: 10px; padding-top: 24px; }
+  .contact-form label { font-size: 15px; font-weight: 500; }
+  .contact-form input, .contact-form select, .contact-form textarea { width: 100%; padding: 10px 12px; margin-bottom: 8px; border: 1px solid var(--ink); border-radius: 0; background: #fff; color: var(--ink); font: 16px/1.5 var(--font-body); }
+  .contact-form textarea { resize: vertical; }
+  .contact-form :focus-visible, .contact-close:focus-visible, .contact-trigger:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .contact-honeypot { position: fixed; left: -10000px; top: 0; width: 1px; height: 1px; overflow: hidden; }
+  .contact-config-note, .contact-status, .contact-privacy { font-size: 14px; line-height: 1.5; color: var(--muted); }
+  .contact-status { min-height: 1.5em; }
+  .contact-submit { align-self: start; }
+  .contact-submit:disabled { cursor: not-allowed; opacity: .5; }
+  .contact-privacy { margin-top: 14px; border-top: 1px solid var(--ink); padding-top: 14px; }
 
   .triangle-section { padding-block: 104px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 64px; align-items: center; }
   .dimensions { border-top: 1px solid var(--ink); margin-top: 12px; }
@@ -416,7 +559,7 @@ const { showPrinciples = true } = Astro.props;
     .voices-section { padding-top: 72px; }
     .hero, .start-grid, .triangle-section, .stance-grid { gap: 36px; }
     .facilitator-wrap { padding-bottom: 72px; }
-    .facilitator-box { padding: 24px; }
+    .facilitator-box, .contact-content { padding: 24px; }
     .triangle-diagram { margin-block: 32px 42px; }
     .triangle-diagram .point-b, .triangle-diagram .point-c { font-size: 15px; }
   }

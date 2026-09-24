@@ -1,13 +1,21 @@
 {
-  // Static-assets-only Worker. No server code yet.
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "wayfinding-site",
+  "main": "./worker/index.ts",
   "compatibility_date": "2026-09-01",
   "account_id": "16c42d94e589cc74c99aed7d51687cbc",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     "not_found_handling": "404-page"
   },
+  "send_email": [
+    { "name": "CONTACT_EMAIL", "destination_address": "contact-destination@example.invalid", "allowed_sender_addresses": ["noreply@wayfinding.support"] }
+  ],
+  "ratelimits": [
+    { "name": "CONTACT_LIMIT", "namespace_id": "4101", "simple": { "limit": 5, "period": 60 } }
+  ],
+  "vars": { "TURNSTILE_SITE_KEY": "" },
   "routes": [
     { "pattern": "wayfinding.support", "custom_domain": true }
   ],
