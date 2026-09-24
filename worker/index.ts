@@ -7,6 +7,7 @@ interface Env {
   TURNSTILE_SECRET_KEY: string;
   TURNSTILE_SITE_KEY: string;
   TURNSTILE_EXPECTED_HOSTNAME?: string;
+  CONTACT_TO: string;
 }
 
 const fail = (status: number) => Response.json({ ok: false, error: 'Unable to send your message.' }, { status });
@@ -79,7 +80,7 @@ async function contact(request: Request, env: Env): Promise<Response> {
   ].join('\n');
   try {
     await env.CONTACT_EMAIL.send({
-      to: 'contact-destination@example.invalid', from: 'noreply@wayfinding.support', replyTo: email,
+      to: env.CONTACT_TO, from: 'noreply@wayfinding.support', replyTo: email,
       subject: `[wayfinding.support] ${labels[topic]} from ${name}`, text,
     });
   } catch (error) {

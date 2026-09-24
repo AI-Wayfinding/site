@@ -1,4 +1,6 @@
 {
+  // Public configuration. The contact-form destination is not in this file:
+  // deploy.sh injects it from CONTACT_TO (see README).
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "wayfinding-site",
   "main": "./worker/index.ts",
@@ -15,7 +17,10 @@
   "ratelimits": [
     { "name": "CONTACT_LIMIT", "namespace_id": "4101", "simple": { "limit": 5, "period": 60 } }
   ],
-  "vars": { "TURNSTILE_SITE_KEY": "0x4AAAAAAFBzQ035TwErnUdh" },
+  "vars": {
+    "TURNSTILE_SITE_KEY": "0x4AAAAAAFBzQ035TwErnUdh",
+    "CONTACT_TO": "contact-destination@example.invalid"
+  },
   "routes": [
     { "pattern": "wayfinding.support", "custom_domain": true }
   ],

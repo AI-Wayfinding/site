@@ -13,6 +13,7 @@ function setup() {
     ASSETS: { fetch: assets }, CONTACT_EMAIL: { send }, CONTACT_LIMIT: { limit },
     TURNSTILE_SECRET_KEY: 'test-secret', TURNSTILE_SITE_KEY: 'test-site',
     TURNSTILE_EXPECTED_HOSTNAME: 'wayfinding.support',
+    CONTACT_TO: 'contact-destination@example.invalid',
   };
   const verify = vi.fn(async (_url: RequestInfo | URL, _init: RequestInit) => Response.json({ success: true, hostname: 'wayfinding.support' }));
   vi.stubGlobal('fetch', verify);

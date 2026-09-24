@@ -1,5 +1,4 @@
 {
-  "name": "@wayfinding/site",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,7 +7,7 @@
     "check": "astro check && tsc -p tsconfig.worker.json",
     "test": "vitest run",
     "preview": "wrangler dev",
-    "deploy": "astro build && wrangler deploy"
+    "deploy": "./deploy.sh"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.2.7",
@@ -23,5 +22,6 @@
     "typescript": "^5.9.0",
     "vitest": "^4.1.11",
     "wrangler": "^4.83.0"
-  }
+  },
+  "name": "@ai-wayfinding/site"
 }

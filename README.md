@@ -1,17 +1,46 @@
-# Wayfinding site
+# wayfinding.support
 
-Static Astro site for `wayfinding.support`, deployed as a Cloudflare Worker with static assets.
+The website for [AI Wayfinding](https://wayfinding.support): a static Astro site served by a Cloudflare Worker, plus the Worker that handles the contact form.
 
-- `src/pages/index.astro`: landing page with the paste-to-agent block.
-- The agent instructions live in the public repository [AI-Wayfinding/getting-started](https://github.com/AI-Wayfinding/getting-started). The copy block points agents straight at its raw `instructions/start.md`; this site keeps no copy.
-- Framework text is not published here until it is cleared; see [framework/SOURCE-STATUS.md](../framework/SOURCE-STATUS.md).
-- Published with Dan's approval on 2026-09-23: the landing page's framework headings and short phrases (the Triangle, Discover/Evaluate/Execute, the three stages, the seven principle titles) and the 20 interview quotes with their role-only credits in `src/data/site.ts`. The full framework text is still not published.
+- `src/pages/index.astro`: the landing page, including the copy-into-your-agent block.
+- `worker/index.ts`: serves the static site and handles `POST /api/contact`.
+- The agent instructions live in [AI-Wayfinding/getting-started](https://github.com/AI-Wayfinding/getting-started). This site links to them and keeps no copy.
+- The framework headings and short phrases on the page, and the 20 interview quotes with role-only credits in `src/data/site.ts`, are published with approval. The full framework text is not published here.
+
+## Develop
 
 ```sh
+npm install
 npm run dev      # local dev server
+npm test         # Worker tests
+npm run check    # Astro and Worker type checks
 npm run build    # static build to dist/
-npm run check    # astro type check
-npm run deploy   # build, then wrangler deploy (needs CLOUDFLARE_API_TOKEN)
 ```
 
-The Cloudflare account is recorded in `wrangler.jsonc`. It is the Reset Enterprise account for now; moving to a Hypha-owned account is planned.
+## Contact form
+
+Checks run in this order; any failure stops the request and no email is sent:
+
+1. Cloudflare WAF rate limit on `POST /api/contact` (configured on the zone).
+2. Size, content type and field validation, plus a hidden honeypot field.
+3. Worker rate limit (a second, looser layer).
+4. [Turnstile](https://developers.cloudflare.com/turnstile/) token verified server-side, tied to `wayfinding.support`.
+5. Email through a `send_email` binding locked to one destination.
+
+Nothing is stored.
+
+## Deploy
+
+The contact-form destination address is private and is not committed. `wrangler.jsonc` holds a placeholder. `deploy.sh` reads the real address and deploys with a temporary config.
+
+```sh
+echo 'CONTACT_TO=someone@example.org' > .deploy.env   # untracked
+export CLOUDFLARE_API_TOKEN=...                      # never commit
+npm run deploy
+```
+
+The Turnstile secret is a Worker secret, set once with `npx wrangler secret put TURNSTILE_SECRET_KEY`.
+
+## Licence
+
+Code: MIT (see `LICENSE`). Page text and quotes are not licensed for reuse.
