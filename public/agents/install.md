@@ -25,13 +25,10 @@ If they already have a journey, ask for its ID.
 
 ## 3. Install the agent client
 
-Tell the person this downloads two files from the public release and installs the `wayfinding` command. Show and ask about each command:
+Tell the person this installs the `wayfinding` command from npm (package `@ai-wayfinding/client`). Show and ask about each command:
 
 ```sh
-R=https://github.com/AI-Wayfinding/journey/releases/download/v0.1.0
-curl -fsSLO "$R/ai-wayfinding-core-0.1.0.tgz"
-curl -fsSLO "$R/ai-wayfinding-client-0.1.0.tgz"
-npm install -g ./ai-wayfinding-core-0.1.0.tgz ./ai-wayfinding-client-0.1.0.tgz
+npm install -g @ai-wayfinding/client
 wayfinding --help
 ```
 
@@ -51,7 +48,7 @@ to run as an MCP server, or for one command at a time:
 wayfinding connect "$WF_JOURNEY" --scope read
 ```
 
-Add `--remember` only if the person chose it. The command prints a link and a six-digit code. Ask the person to open the link, check the code matches, choose the access and time, and confirm with their passkey. Wait until the command says it is approved. For an MCP server, show the person the configuration snippet in the client's README (https://github.com/AI-Wayfinding/journey/tree/main/packages/client) and ask before adding it to your client.
+Add `--name "Your name"` to either command to suggest a name for yourself; the person can change it before approving or rename you later in **People & agents**. Add `--remember` only if the person chose it. The command prints a link and a six-digit code. Ask the person to open the link, check the code matches, choose the access and time, and confirm with their passkey. Wait until the command says it is approved. If the command cannot reach `app.wayfinding.support`, your environment is blocking it: tell the person their workspace admin needs to allow that domain, and stop. For an MCP server, show the person the configuration snippet in the client's README (https://github.com/AI-Wayfinding/journey/tree/main/packages/client) and ask before adding it to your client.
 
 ## 5. Bring in their documents
 
