@@ -15,8 +15,7 @@ const { showPrinciples = true } = Astro.props;
       <a href="#triangle">The Triangle</a>
       <a href="#exercise">How it works</a>
       <a href="#outcomes">Outcomes</a>
-      <a href="#wayfinders">Join the wayfinders</a>
-      <a class="nav-start" href="#start">Start with your agent →</a>
+      <a class="nav-start" href="#start">Start your journey →</a>
     </nav>
   </header>
   <div class="spectrum" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
@@ -31,7 +30,7 @@ const { showPrinciples = true } = Astro.props;
         <p class="hero-lede">Decide whether, where and how AI serves your mission, your relationships and your work.</p>
         <p class="body-copy">Every outcome is on the table, including less AI or none. A human facilitator leads; an authorised person decides. Agents assist, and ask before they act.</p>
         <div class="button-row">
-          <a class="button button-primary" href="#start">Start with your agent</a>
+          <a class="button button-primary" href="#start">Start your journey</a>
           <a class="button button-outline" href="#facilitator">Work with a facilitator</a>
         </div>
       </div>
@@ -49,14 +48,15 @@ const { showPrinciples = true } = Astro.props;
     <section id="start" class="start-section panel" aria-labelledby="start-heading">
       <div class="wrap start-grid">
         <div class="stack">
-          <p class="eyebrow accent">01 — Start</p>
-          <h2 id="start-heading">Start with your agent</h2>
-          <p class="section-intro">Copy this into your AI agent. It starts with a private interview about you, and it tells you what it will do before it does anything.</p>
+          <p class="eyebrow accent">Start here</p>
+          <h2 id="start-heading">Start your journey</h2>
+          <p class="section-intro">Three ways in: with your own AI agent, on your own, or with a guide. Pick the one that fits; you can switch later.</p>
+          <h3 class="option-heading"><span>1</span>Start with your agent</h3>
+          <p class="body-copy">Copy this into your AI agent. It starts with a private interview about you, and it tells you what it will do before it does anything.</p>
           <ul class="benefits" aria-label="What you get">
             <li><span aria-hidden="true">→</span>Your first position: an interview run by your agent, written up as a short sensemaking document that shows where you stand today.</li>
             <li><span aria-hidden="true">→</span>A guide for interviewing a teammate, so you can compare positions and start making sense of AI together.</li>
             <li><span aria-hidden="true">→</span>It stays yours. Nothing is sent to Wayfinding; you decide what to keep and what to share.</li>
-            <li><span aria-hidden="true">→</span>When you want a place to keep it, start an encrypted <a href="https://app.wayfinding.support">journey</a> for yourself or your team. It's encrypted on your device; we never store it in a form we can read.</li>
           </ul>
         </div>
         <div class="prompt-box">
@@ -65,9 +65,15 @@ const { showPrinciples = true } = Astro.props;
           <a href="https://github.com/AI-Wayfinding/getting-started">Read the instructions first →</a>
         </div>
       </div>
+      <div id="journey" class="wrap facilitator-wrap">
+        <div class="facilitator-box">
+          <div class="stack small-stack"><h3 class="option-heading"><span>2</span>Start your own journey</h3></div>
+          <div class="stack facilitator-copy"><p class="body-copy">No agent needed. Keep your notes, interviews and decisions in an encrypted journey for yourself or your team. It's encrypted on your device; we never store it in a form we can read.</p><a class="button button-primary" href="https://app.wayfinding.support">Open AI Wayfinding Journeys →</a></div>
+        </div>
+      </div>
       <div id="facilitator" class="wrap facilitator-wrap">
         <div class="facilitator-box">
-          <div class="stack small-stack"><p class="eyebrow">Or start with a person</p><h3>Let us be your guide</h3></div>
+          <div class="stack small-stack"><h3 class="option-heading"><span>3</span>Let us be your guide</h3></div>
           <div class="stack facilitator-copy"><p class="body-copy">No agent needed. A facilitator from one of our partner organisations can lead your team through listening, weighing options and a first decision.</p><button class="button button-primary contact-trigger" type="button" data-contact-topic="facilitator">Contact us →</button><p class="body-copy">Or email <a href="mailto:hello@wayfinding.support">hello@wayfinding.support</a>.</p></div>
         </div>
       </div>
@@ -75,7 +81,7 @@ const { showPrinciples = true } = Astro.props;
 
     <section id="triangle" class="triangle-section wrap" aria-labelledby="triangle-heading">
       <div class="stack">
-        <p class="eyebrow accent">02 — Why</p>
+        <p class="eyebrow accent">01 — Why</p>
         <h2 id="triangle-heading">Weigh every choice on three points</h2>
         <p class="section-intro">The Evaluation Triangle is both the reason to consider AI and the lens for judging it — before, during and after. Time savings alone are never enough.</p>
         <div class="dimensions">
@@ -100,7 +106,7 @@ const { showPrinciples = true } = Astro.props;
     <section id="exercise" class="exercise-section panel" aria-labelledby="exercise-heading">
       <div class="wrap exercise-content">
         <div class="section-heading split-heading">
-          <div class="stack"><p class="eyebrow accent">03 — How</p><h2 id="exercise-heading">A practice, not a one-off</h2></div>
+          <div class="stack"><p class="eyebrow accent">02 — How</p><h2 id="exercise-heading">A practice, not a one-off</h2></div>
           <p class="body-copy">Wayfinding starts with listening and keeps going: working sessions on real tasks, learning from peers, and decisions that get reviewed.</p>
         </div>
         <div class="mode-grid">
@@ -141,30 +147,30 @@ const { showPrinciples = true } = Astro.props;
     </section>
 
     <section id="outcomes" class="outcomes-section wrap" aria-labelledby="outcomes-heading">
-      <div class="stack outcomes-intro"><p class="eyebrow accent">04 — Outcomes</p><h2 id="outcomes-heading">Stopping is a destination too</h2><p class="section-intro">Wayfinding doesn't push anyone up a ladder. Its job is to make the choice clear. Each of these is the framework working as designed.</p></div>
+      <div class="stack outcomes-intro"><p class="eyebrow accent">03 — Outcomes</p><h2 id="outcomes-heading">Stopping is a destination too</h2><p class="section-intro">Wayfinding doesn't push anyone up a ladder. Its job is to make the choice clear. Each of these is the framework working as designed.</p></div>
       <div class="outcome-list">{outcomes.map((outcome) => <span>{outcome}</span>)}</div>
     </section>
 
     {showPrinciples && <section class="stance-section" aria-labelledby="stance-heading">
       <div class="wrap stance-grid">
-        <div class="stack"><p class="eyebrow">05 — Stance</p><h2 id="stance-heading">Cardinal directions before the compass</h2><p class="body-copy">Strategy is the tools you use. Stance is how you position yourself to decide well as things change.</p></div>
+        <div class="stack"><p class="eyebrow">04 — Stance</p><h2 id="stance-heading">Cardinal directions before the compass</h2><p class="body-copy">Strategy is the tools you use. Stance is how you position yourself to decide well as things change.</p></div>
         <ol>{principles.map((principle) => <li><span>{principle.n}</span><span>{principle.t}</span></li>)}</ol>
       </div>
     </section>}
 
-    <section id="wayfinders" class="wayfinders-section" aria-labelledby="wayfinders-heading">
+    <section id="ready" class="wayfinders-section" aria-labelledby="ready-heading">
       <div class="wrap wayfinders-grid">
         <div class="stack">
-          <p class="eyebrow accent">The network</p>
-          <h2 id="wayfinders-heading">Become an AI wayfinder</h2>
+          <p class="eyebrow accent">Start your journey</p>
+          <h2 id="ready-heading">Ready when you are</h2>
         </div>
         <div class="stack wayfinders-copy">
-          <p class="body-copy">Wayfinders are people helping their teams decide what AI is for, and what it isn't. Start with your own interview, interview a teammate, then share what you learn with other wayfinders.</p>
-          <p class="body-copy">The peer network is just starting. Tell us you'd like to join and we'll be in touch.</p>
           <div class="button-row">
-            <a class="button button-primary" href="#start">Start your interview</a>
-            <button class="button button-outline contact-trigger" type="button" data-contact-topic="join">Join other wayfinders →</button>
+            <a class="button button-primary" href="#start">Start with your agent</a>
+            <a class="button button-outline" href="https://app.wayfinding.support">Start your own journey</a>
+            <button class="button button-outline contact-trigger" type="button" data-contact-topic="facilitator">Let us be your guide</button>
           </div>
+          <p class="body-copy">Helping your team decide what AI is for? <button class="link-button contact-trigger" type="button" data-contact-topic="join">Join other wayfinders →</button></p>
         </div>
       </div>
     </section>
@@ -213,7 +219,7 @@ const { showPrinciples = true } = Astro.props;
 
   <footer class="site-footer wrap">
     <span>Wayfinding is how you move when the destination is uncertain.</span>
-    <nav aria-label="Footer"><a href="https://app.wayfinding.support">Sign in to your journey</a><a href="https://github.com/AI-Wayfinding/getting-started">Agent instructions</a><a href="https://github.com/AI-Wayfinding">Source code</a><a href="#wayfinders">Become a wayfinder</a><a href="mailto:hello@wayfinding.support">hello@wayfinding.support</a><span>Facilitator guide</span><span>Improve Wayfinding</span></nav>
+    <nav aria-label="Footer"><a href="https://app.wayfinding.support">Sign in to your journey</a><a href="https://github.com/AI-Wayfinding/getting-started">Agent instructions</a><a href="https://github.com/AI-Wayfinding">Source code</a><a href="#ready">Start your journey</a><a href="mailto:hello@wayfinding.support">hello@wayfinding.support</a><span>Facilitator guide</span><span>Improve Wayfinding</span></nav>
   </footer>
 
   <script>
@@ -369,7 +375,7 @@ const { showPrinciples = true } = Astro.props;
   .accent { color: var(--accent); }
   .stack { display: flex; flex-direction: column; gap: 20px; }
   h1, h2, h3, h4, p { margin-block: 0; }
-  h1, h2, .facilitator-box h3 { font-family: var(--font-display); font-weight: 400; }
+  h1, h2, .facilitator-box h3, .option-heading { font-family: var(--font-display); font-weight: 400; }
   h2 { font-size: clamp(40px, 5vw, 60px); line-height: 1; }
   .body-copy, .section-intro { color: var(--muted); line-height: 1.6; text-wrap: pretty; }
   .body-copy { font-size: 17px; }
@@ -426,6 +432,12 @@ const { showPrinciples = true } = Astro.props;
   .facilitator-wrap { padding-bottom: 88px; }
   .facilitator-box { border: 1px solid var(--ink); background: var(--paper); padding: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 24px 48px; align-items: center; }
   .small-stack { gap: 12px; }
+  .option-heading { display: flex; align-items: baseline; gap: 14px; }
+  .option-heading span { color: var(--accent); font: 15px var(--font-mono); }
+  .start-grid .option-heading { margin-top: 12px; font-size: 40px; line-height: 1.05; }
+  #journey { padding-bottom: 24px; }
+  .link-button { border: 0; padding: 0; background: none; color: inherit; font: inherit; text-decoration: underline; cursor: pointer; }
+  .link-button:hover { color: var(--accent); }
   .facilitator-box h3 { font-size: 40px; line-height: 1.05; }
   .facilitator-copy { gap: 18px; align-items: flex-start; }
   .contact-trigger, .contact-submit { font-family: inherit; cursor: pointer; border-radius: 0; }
