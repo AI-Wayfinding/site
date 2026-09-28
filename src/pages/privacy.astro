@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import Footer from '../components/Footer.astro';
+---
+<Base title="Privacy policy · Wayfinding" description="How Wayfinding handles your information.">
+  <main class="privacy">
+    <a class="brand" href="/"><img src="/wayfinding-mark.svg" alt="" width="30" height="30" /><span>AI Wayfinding</span></a>
+    <h1>Privacy policy</h1>
+    <p>To be decided. We are writing this now.</p>
+    <p>Questions in the meantime: <a href="mailto:hello@wayfinding.support">hello@wayfinding.support</a>.</p>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .privacy { max-width: 1200px; margin-inline: auto; padding: 22px 32px 96px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brand span { font: 28px/1 var(--font-display); }
+  h1 { margin: 72px 0 16px; font: 400 56px/1 var(--font-display); }
+  p { color: var(--muted); font-size: 17px; line-height: 1.6; }
+</style>

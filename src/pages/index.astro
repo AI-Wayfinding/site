@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Footer from '../components/Footer.astro';
 import { prompt, voiceSets, modes, loop, stages, outcomes, principles, turnstileSiteKey } from '../data/site';
 
 interface Props { showPrinciples?: boolean; }
@@ -217,10 +218,7 @@ const { showPrinciples = true } = Astro.props;
     </div>
   </dialog>
 
-  <footer class="site-footer wrap">
-    <span>Wayfinding is how you move when the destination is uncertain.</span>
-    <nav aria-label="Footer"><a href="https://app.wayfinding.support">Sign in to your journey</a><a href="/agents/start.md">Agent instructions</a><a href="https://github.com/AI-Wayfinding">Source code</a><a href="#ready">Start your journey</a><a href="mailto:hello@wayfinding.support">hello@wayfinding.support</a><span>Facilitator guide</span><span>Improve Wayfinding</span></nav>
-  </footer>
+  <Footer />
 
   <script>
     const button = document.querySelector<HTMLButtonElement>('#copy');
@@ -553,10 +551,6 @@ const { showPrinciples = true } = Astro.props;
   .partner-details { display: flex; flex-direction: column; gap: 6px; padding: 20px 24px 24px; }
   .partner-details span:first-child { font: 30px/1.1 var(--font-display); }
   .partner-details span:last-child { font: 13px var(--font-mono); }
-  .site-footer { padding-block: 40px 56px; display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
-  .site-footer > span { color: var(--ink); font: 22px var(--font-display); }
-  .site-footer nav { display: flex; gap: 24px; flex-wrap: wrap; }
-  .site-footer nav span { color: var(--muted); }
 
   @media (max-width: 760px) {
     .hero h1 em { white-space: normal; }
