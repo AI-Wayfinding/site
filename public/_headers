@@ -3,3 +3,7 @@
   Cache-Control: public, max-age=0, must-revalidate, no-transform
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
+
+# Agent instructions are fetched with curl; serve them as plain Markdown.
+/agents/*
+  Content-Type: text/markdown; charset=utf-8

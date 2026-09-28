@@ -4,7 +4,7 @@ The website for [AI Wayfinding](https://wayfinding.support): a static Astro site
 
 - `src/pages/index.astro`: the landing page, including the copy-into-your-agent block.
 - `worker/index.ts`: serves the static site and handles `POST /api/contact`.
-- The agent instructions live in [AI-Wayfinding/getting-started](https://github.com/AI-Wayfinding/getting-started). This site links to them and keeps no copy.
+- `public/agents/`: the instructions an AI agent follows, served at `https://wayfinding.support/agents/<name>.md`. The homepage prompt fetches `start.md`, which links to the other activities. Content comes from the retired `getting-started` repository.
 - The framework headings and short phrases on the page, and the 20 interview quotes with role-only credits in `src/data/site.ts`, are published with approval. The full framework text is not published here.
 
 ## Develop
@@ -43,4 +43,4 @@ The Turnstile secret is a Worker secret, set once with `npx wrangler secret put 
 
 ## Licence
 
-Code: MIT (see `LICENSE`). Page text and quotes are not licensed for reuse.
+Code: MIT (see `LICENSE`). Agent instructions in `public/agents/`: CC BY 4.0 (see `LICENSE-CC-BY-4.0`). Other page text and quotes are not licensed for reuse.
