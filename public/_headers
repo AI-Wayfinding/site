@@ -9,6 +9,6 @@
   Content-Type: text/markdown; charset=utf-8
 
 # Relay fidelity test: plain text, never cached.
-/agents/relay-test/*
+/relay-test/*
   Content-Type: text/plain; charset=utf-8
   Cache-Control: no-store
