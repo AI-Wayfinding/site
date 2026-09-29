@@ -63,7 +63,7 @@ Add `--name "Your name"` to either command to suggest a name for yourself; the p
 wayfinding connect "$WF_JOURNEY" --scope read --name "Your name" --state ./wayfinding-session.json --no-wait --json
 ```
 
-Show the person the `link` and `code` it prints, and ask them to approve. Then run:
+Show the person the `link` and `code` it prints straight away, and ask them to approve. **They have 10 minutes** (see `expiresAt`); after that the request expires and you must run this step again for a new link and code. Then run:
 
 ```sh
 wayfinding connect --state ./wayfinding-session.json --wait --json
