@@ -55,7 +55,21 @@ to run as an MCP server, or for one command at a time:
 wayfinding connect "$WF_JOURNEY" --scope read
 ```
 
-Add `--name "Your name"` to either command to suggest a name for yourself; the person can change it before approving or rename you later in **People & agents**. Add `--remember` only if the person chose it. The command prints a link and a six-digit code. Ask the person to open the link, check the code matches, choose the access and time, and confirm with their passkey. Wait until the command says it is approved. If the command cannot reach `app.wayfinding.support`, your environment is blocking it: tell the person their workspace admin needs to allow that domain, and stop. For an MCP server, show the person the configuration snippet in the client's README (https://github.com/AI-Wayfinding/journey/tree/main/packages/client) and ask before adding it to your client.
+Add `--name "Your name"` to either command to suggest a name for yourself; the person can change it before approving or rename you later in **People & agents**. Add `--remember` only if the person chose it. The command prints a link and a six-digit code. Ask the person to open the link, check the code matches, choose the access and time, and confirm with their passkey. Wait until the command says it is approved. If a network proxy is set (`HTTPS_PROXY`), the client uses it automatically. If the command cannot reach `app.wayfinding.support`, read the error it prints: if it says the host is blocked, tell the person their workspace admin needs to allow that domain, and stop.
+
+**If each command runs in a fresh sandbox** (for example Claude Cowork, where nothing keeps running between commands), connect in two steps with a state file instead:
+
+```sh
+wayfinding connect "$WF_JOURNEY" --scope read --name "Your name" --state ./wayfinding-session.json --no-wait --json
+```
+
+Show the person the `link` and `code` it prints, and ask them to approve. Then run:
+
+```sh
+wayfinding connect --state ./wayfinding-session.json --wait --json
+```
+
+Exit code 0 means approved; 2 means still waiting, so run it again; 3 means the request expired; 4 means it was denied. Add `--state ./wayfinding-session.json` to every later `wayfinding` command. The file holds your keys for this session only (at most 8 hours); the approval page tells the person about it. For an MCP server, show the person the configuration snippet in the client's README (https://github.com/AI-Wayfinding/journey/tree/main/packages/client) and ask before adding it to your client.
 
 ## 5. Bring in their documents
 
