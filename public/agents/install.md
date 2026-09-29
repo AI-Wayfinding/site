@@ -32,7 +32,14 @@ npm install -g @ai-wayfinding/client
 wayfinding --help
 ```
 
-If a global install is not allowed, stop and say so. Do not switch to another source.
+If the global install fails with a permissions error (`EACCES`), install the same package into a folder you own instead, and use that path for every later `wayfinding` command:
+
+```sh
+npm install -g --prefix "$HOME/.npm-global" @ai-wayfinding/client
+"$HOME/.npm-global/bin/wayfinding" --help
+```
+
+If neither works, stop and say so. Do not switch to another source.
 
 ## 4. Ask for access
 
