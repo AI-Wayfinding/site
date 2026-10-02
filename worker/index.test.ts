@@ -136,11 +136,11 @@ describe('contact endpoint', () => {
     if (!('text' in email)) throw new Error('Expected a composed email');
     expect(email).toMatchObject({
       to: 'contact-destination@example.invalid', from: 'noreply@wayfinding.support',
-      replyTo: 'ada@example.org', subject: '[wayfinding.support] join the network from Ada',
+      replyTo: 'ada@example.org', subject: '[wayfinding.support] register interest in the peer network from Ada',
     });
     expect(email.text).toContain('Name: Ada');
     expect(email.text).toContain('Email: ada@example.org');
-    expect(email.text).toContain('Topic: join the network');
+    expect(email.text).toContain('Topic: register interest in the peer network');
     expect(email.text).toContain('Please add me.');
     expect(email.text).toContain('Country: GB');
     expect(email.text).toMatch(/Submitted at: \d{4}-\d{2}-\d{2}T/);

@@ -71,7 +71,7 @@ async function contact(request: Request, env: Env): Promise<Response> {
         !('hostname' in result) || result.hostname !== (env.TURNSTILE_EXPECTED_HOSTNAME || 'wayfinding.support')) return fail(403);
   } catch { return fail(403); }
 
-  const labels = { join: 'join the network', facilitator: 'work with a facilitator', share: 'share a lesson', other: 'something else' };
+  const labels = { join: 'register interest in the peer network', facilitator: 'work with a facilitator', share: 'share a lesson', other: 'something else' };
   const country = (request as Request & { cf?: { country?: string } }).cf?.country;
   const text = [
     `Name: ${name}`, `Email: ${email}`, `Topic: ${labels[topic]}`, `Message:`, message,

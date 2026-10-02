@@ -5,7 +5,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "check": "astro check && tsc -p tsconfig.worker.json",
-    "test": "vitest run",
+    "test": "vitest run && node --test tests/site.test.mjs",
     "preview": "wrangler dev",
     "deploy": "./deploy.sh"
   },

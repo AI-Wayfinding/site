@@ -10,6 +10,7 @@ const { showPrinciples = true } = Astro.props;
   title="AI Wayfinding"
   description="Decide whether, where and how AI serves your mission, your relationships and your work."
 >
+  <a class="skip-link" href="#top">Skip to main content</a>
   <header class="site-header wrap">
     <a class="brand" href="#top"><img src="/wayfinding-mark.svg" alt="" width="30" height="30" /><span>AI Wayfinding</span></a>
     <nav aria-label="Main navigation">
@@ -21,7 +22,7 @@ const { showPrinciples = true } = Astro.props;
   </header>
   <div class="spectrum" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 
-  <main id="top">
+  <main id="top" tabindex="-1">
     <section class="hero wrap" aria-labelledby="hero-heading">
       <div>
         <p class="eyebrow hero-eyebrow">For mission-driven teams</p>
@@ -53,15 +54,16 @@ const { showPrinciples = true } = Astro.props;
           <h2 id="start-heading">Start your journey</h2>
           <p class="section-intro">With your own AI agent, on your own, or with a guide. Pick the one that fits; you can switch later.</p>
           <h3 class="option-heading"><span>1</span>With your agent</h3>
-          <p class="body-copy">Copy this into your AI agent. It opens with a private interview about you, and it tells you what it will do before it does anything.</p>
+          <p class="body-copy">Copy this into your AI agent. It starts with an interview about you. Your answers go to your own AI provider, under its terms. Your agent tells you what it will do before it acts.</p>
           <ul class="benefits" aria-label="What you get">
             <li><span aria-hidden="true">→</span>Your first position: an interview run by your agent, written up as a short sensemaking document that shows where you stand today.</li>
             <li><span aria-hidden="true">→</span>A guide for interviewing a teammate, so you can compare positions and begin making sense of AI together.</li>
-            <li><span aria-hidden="true">→</span>It stays yours. Nothing is sent to Wayfinding; you decide what to keep and what to share.</li>
+            <li><span aria-hidden="true">→</span>It stays yours. Your interview answers are not sent to Wayfinding unless you choose to add or share them. You decide what to keep and what to share.</li>
           </ul>
         </div>
         <div class="prompt-box">
           <div class="prompt-head"><span>paste into your agent</span><button id="copy" type="button">Copy</button></div>
+          <p id="copy-status" class="copy-status" role="status"></p>
           <pre id="prompt">{prompt}</pre>
           <a href="/agents/start.md">Read the instructions first →</a>
         </div>
@@ -69,7 +71,7 @@ const { showPrinciples = true } = Astro.props;
       <div id="journey" class="wrap facilitator-wrap">
         <div class="facilitator-box">
           <div class="stack small-stack"><h3 class="option-heading"><span>2</span>On your own</h3></div>
-          <div class="stack facilitator-copy"><p class="body-copy">No agent needed. Keep your notes, interviews and decisions in an encrypted journey for yourself or your team. It's encrypted on your device, only you and the people you invite hold the keys, and we store it in a form we can't read.</p><a class="button button-primary" href="https://app.wayfinding.support">Open AI Wayfinding Journeys →</a></div>
+          <div class="stack facilitator-copy"><p class="body-copy">No agent needed. Keep your notes, interviews and decisions in an encrypted journey for yourself or your team. Content is encrypted on your device before we store it. Agent links are an exception: if you approve one, our server decrypts journey content in memory to send it to your agent. The server still sees details such as who is in a journey and when they use it.</p><a class="button button-primary" href="https://app.wayfinding.support">Open AI Wayfinding Journeys →</a></div>
         </div>
       </div>
       <div id="facilitator" class="wrap facilitator-wrap">
@@ -138,8 +140,10 @@ const { showPrinciples = true } = Astro.props;
         <p class="eyebrow accent">From the practice</p>
         <h2 id="voices-heading">Holding two things at once</h2>
         <p class="section-intro">What we've learned while listening, before anyone recommended a tool. Curious and cautious, rarely one or the other.</p>
+        <p class="body-copy">Published with permission; names withheld.</p>
+        <button id="pause-quotes" class="button button-outline" type="button" aria-pressed="false" aria-controls="quote-grid" hidden>Pause quotes</button>
       </div>
-      <div class="voice-grid" data-voice-sets={JSON.stringify(voiceSets)}>
+      <div id="quote-grid" class="voice-grid" data-voice-sets={JSON.stringify(voiceSets)}>
         {voiceSets.map((set) => <figure class="voice-card" tabindex="0" role="button" aria-label={`Advance ${set.tag} quote`}>
           <div class="voice-top"><span class="voice-tag">{set.tag}</span><span class="voice-dots" aria-hidden="true">{set.items.map((_, index) => <span class:list={['voice-dot', { active: index === 0 }]}></span>)}</span></div>
           <div class="voice-quote" aria-live="polite" aria-atomic="true"><blockquote>“{set.items[0].q}”</blockquote><figcaption>{set.items[0].who}</figcaption></div>
@@ -171,7 +175,7 @@ const { showPrinciples = true } = Astro.props;
             <a class="button button-outline" href="https://app.wayfinding.support">Open a journey</a>
             <button class="button button-outline contact-trigger" type="button" data-contact-topic="facilitator">Talk to a guide</button>
           </div>
-          <p class="body-copy">Helping your team decide what AI is for? <button class="link-button contact-trigger" type="button" data-contact-topic="join">Join other wayfinders →</button></p>
+          <p class="body-copy">Want to hear when the peer network opens? <button class="link-button contact-trigger" type="button" data-contact-topic="join">Register interest in the peer network →</button></p>
         </div>
       </div>
     </section>
@@ -199,7 +203,7 @@ const { showPrinciples = true } = Astro.props;
         <input id="contact-email" name="email" type="email" required maxlength="254" autocomplete="email" />
         <label for="contact-topic">Topic</label>
         <select id="contact-topic" name="topic" required>
-          <option value="join">Join the network</option>
+          <option value="join">Register interest in the peer network</option>
           <option value="facilitator">Work with a facilitator</option>
           <option value="share">Share a lesson</option>
           <option value="other">Something else</option>
@@ -214,7 +218,7 @@ const { showPrinciples = true } = Astro.props;
         <button id="contact-submit" class="button button-primary contact-submit" type="submit" disabled>Send message</button>
         <p id="contact-status" class="contact-status" role="status" aria-live="polite"></p>
       </form>
-      <p class="contact-privacy">We use your details only to reply. Nothing is stored on this site.</p>
+      <p class="contact-privacy">Your message goes to us by email. Cloudflare checks this form for spam. We use your details to reply, or to contact you about the peer network if you register interest.</p>
     </div>
   </dialog>
 
@@ -223,14 +227,18 @@ const { showPrinciples = true } = Astro.props;
   <script>
     const button = document.querySelector<HTMLButtonElement>('#copy');
     const prompt = document.querySelector<HTMLElement>('#prompt')?.textContent ?? '';
+    const copyStatus = document.querySelector<HTMLElement>('#copy-status');
     let copyTimer: ReturnType<typeof setTimeout>;
     button?.addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(prompt);
         button.textContent = 'Copied';
+        if (copyStatus) copyStatus.textContent = 'Copied. Paste it into your agent.';
         clearTimeout(copyTimer);
         copyTimer = setTimeout(() => { button.textContent = 'Copy'; }, 1500);
-      } catch { /* Clipboard unavailable: leave the label unchanged. */ }
+      } catch {
+        if (copyStatus) copyStatus.textContent = 'Could not copy. Select the text and copy it yourself.';
+      }
     });
 
     const grid = document.querySelector<HTMLElement>('.voice-grid');
@@ -239,6 +247,9 @@ const { showPrinciples = true } = Astro.props;
       const cards = Array.from(grid.querySelectorAll<HTMLElement>('.voice-card'));
       const indices = sets.map(() => 0);
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const pauseButton = document.querySelector<HTMLButtonElement>('#pause-quotes');
+      const fades = new Map<HTMLElement, ReturnType<typeof setTimeout>>();
+      let paused = false;
       let turn = 0;
       function advance(cardIndex: number) {
         const card = cards[cardIndex];
@@ -254,11 +265,12 @@ const { showPrinciples = true } = Astro.props;
           if (credit) credit.textContent = item.who;
           card.querySelectorAll('.voice-dot').forEach((dot, index) => dot.classList.toggle('active', index === indices[cardIndex]));
           quote.classList.remove('fading');
+          fades.delete(quote);
         };
         if (reducedMotion.matches) swap();
         else {
           quote.classList.add('fading');
-          window.setTimeout(swap, 450);
+          fades.set(quote, setTimeout(swap, 450));
         }
       }
       cards.forEach((card, index) => {
@@ -270,8 +282,22 @@ const { showPrinciples = true } = Astro.props;
       let rotation: ReturnType<typeof setInterval> | undefined;
       function syncRotation() {
         if (rotation) clearInterval(rotation);
-        if (!reducedMotion.matches) rotation = setInterval(() => { advance(turn % cards.length); turn++; }, 2600);
+        rotation = undefined;
+        const stopped = paused || reducedMotion.matches;
+        if (stopped) {
+          fades.forEach((timer, quote) => { clearTimeout(timer); quote.classList.remove('fading'); });
+          fades.clear();
+        }
+        cards.forEach(card => card.querySelector('.voice-quote')?.setAttribute('aria-live', stopped ? 'polite' : 'off'));
+        if (pauseButton) {
+          pauseButton.hidden = false;
+          pauseButton.disabled = reducedMotion.matches;
+          pauseButton.textContent = reducedMotion.matches ? 'Quotes paused for reduced motion' : paused ? 'Resume quotes' : 'Pause quotes';
+          pauseButton.setAttribute('aria-pressed', String(stopped));
+        }
+        if (!stopped && cards.length) rotation = setInterval(() => { advance(turn % cards.length); turn++; }, 2600);
       }
+      pauseButton?.addEventListener('click', () => { paused = !paused; syncRotation(); });
       syncRotation();
       reducedMotion.addEventListener('change', syncRotation);
     }
@@ -367,6 +393,14 @@ const { showPrinciples = true } = Astro.props;
 </Base>
 
 <style>
+  .skip-link { position: fixed; top: 12px; left: 12px; z-index: 10; padding: 12px 20px; background: var(--ink); color: var(--paper); transform: translateY(-200%); }
+  .skip-link:focus { transform: translateY(0); outline: 2px solid var(--accent); outline-offset: 2px; }
+  #pause-quotes { align-self: start; font: inherit; color: var(--ink); background: var(--paper); cursor: pointer; }
+  #pause-quotes[hidden] { display: none; }
+  #pause-quotes:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #pause-quotes:disabled { cursor: default; }
+  .copy-status { padding-inline: 16px; font-size: 14px; line-height: 1.5; }
+  .copy-status:not(:empty) { padding-top: 12px; }
   .wrap { max-width: 1200px; margin-inline: auto; padding-inline: 32px; }
   .panel { background: var(--paper-light); }
   .eyebrow { margin: 0; font: 400 13px/1.5 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
