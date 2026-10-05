@@ -13,15 +13,9 @@ Show each probe and get an OK before running it:
 
 ## 2. The person starts a journey
 
-The person does this in their browser; you cannot do it for them. Tell them:
+The person does this in their browser; you cannot do it for them. If they need a new journey, guide them through https://wayfinding.support/agents/start.md, from **Start your journey** to **Add your agent**. They can use **Copy prompt** there to give you the journey ID.
 
-1. Open https://app.wayfinding.support and sign in with their email. They get a sign-in link.
-2. Create a passkey when asked. It needs a recent browser: Chrome or Edge 116+, Safari 18+, or Firefox 139+.
-3. Start a journey, for themselves or their team.
-4. **Save the recovery key** it shows once. Anyone with that key can read the journey, and Wayfinding cannot recover it.
-5. Tell you the journey ID from the address bar (`/journeys/<id>`).
-
-If they already have a journey, ask for its ID.
+If they already have a journey, use its **Add your agent** page and the journey ID in its prompt.
 
 ## 3. Install the agent client
 
@@ -55,12 +49,12 @@ to run as an MCP server, or for one command at a time:
 wayfinding connect "$WF_JOURNEY" --scope read
 ```
 
-Add `--name "Your name"` to either command to suggest a name for yourself; the person can change it before approving or rename you later in **People & agents**. Add `--remember` only if the person chose it. The command prints a link and a six-digit code. Ask the person to open the link, check the code matches, choose the access and time, and confirm with their passkey. Wait until the command says it is approved. If a network proxy is set (`HTTPS_PROXY`), the client uses it automatically. If the command cannot reach `app.wayfinding.support`, read the error it prints: if it says the host is blocked, tell the person their workspace admin needs to allow that domain, and stop.
+The person sets your name in **Name** on **Approve an agent** and can rename you later in **People & agents**. Add `--remember` only if the person chose it. The command prints a link and a six-digit code. Ask the person to open the link, check the code matches, choose the access and time, and confirm with their passkey. Wait until the command says it is approved. If a network proxy is set (`HTTPS_PROXY`), the client uses it automatically. If the command cannot reach `app.wayfinding.support`, read the error it prints: if it says the host is blocked, tell the person their workspace admin needs to allow that domain, and stop.
 
 **If each command runs in a fresh sandbox** (for example Claude Cowork, where nothing keeps running between commands), connect in two steps with a state file instead:
 
 ```sh
-wayfinding connect "$WF_JOURNEY" --scope read --name "Your name" --state ./wayfinding-session.json --no-wait --json
+wayfinding connect "$WF_JOURNEY" --scope read --state ./wayfinding-session.json --no-wait --json
 ```
 
 Show the person the `link` and `code` it prints straight away, and ask them to approve. **They have 10 minutes** (see `expiresAt`); after that the request expires and you must run this step again for a new link and code. Then run:
