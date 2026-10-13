@@ -141,7 +141,8 @@ test('skip link, quote label and disclosures remain in place', () => {
   assert.match(home, /Your message goes to us by email\. Cloudflare checks this form for spam\./);
   assert.match(home, /Your answers go to your own AI provider, under its terms\./);
   assert.match(source('public/agents/start.md'), /Your answers go to your own AI provider, under its terms\./);
-  for (const path of ['src/pages/index.astro', 'public/agents/install.md', 'public/agents/start.md']) {
+  assert.doesNotMatch(home, /Agent links are an exception/);
+  for (const path of ['public/agents/install.md', 'public/agents/start.md']) {
     const text = source(path);
     assert.match(text, /Agent links are an exception/);
     assert.match(text, /server still sees details such as who is in a journey and when/);
