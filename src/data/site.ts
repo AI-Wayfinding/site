@@ -60,7 +60,7 @@ export const stages = [
   { n: 'III', t: 'Transform', d: 'AI reshapes how the organisation creates impact.' }
 ];
 
-export const outcomes = ['Refuse', 'Defer, with a reason', 'A non-AI alternative', 'Stay at Build Fluency', 'Reduce use', 'One bounded experiment'];
+export const outcomes = ['Refuse', 'Defer, with a reason', 'A non-AI alternative', 'Reduce use', 'Stay at Build Fluency', 'One bounded experiment', 'Capture value in a few areas', 'Transform how you work'];
 
 export const principles = [
   { n: 'i', t: 'Articulate your moral boundaries.' },
