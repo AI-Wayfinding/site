@@ -185,6 +185,7 @@ const { showPrinciples = true } = Astro.props;
         <a href="https://www.reset.tech/" class="partner-card"><span class="partner-logo"><img class="reset-logo" src="/partners/reset-logo.png" alt="Reset Tech logo" /></span><span class="partner-details"><span>Reset Tech</span><span>reset.tech ↗</span></span></a>
         <a href="https://aspirationtech.org/" class="partner-card"><span class="partner-logo"><img class="aspiration-logo" src="/partners/aspiration-logo.svg" alt="Aspiration logo" /></span><span class="partner-details"><span>Aspiration</span><span>aspirationtech.org ↗</span></span></a>
         <a href="https://hypha.group/" class="partner-card"><span class="partner-logo"><img class="hypha-logo" src="/partners/hypha-logo.png" alt="Hypha Group logo" /></span><span class="partner-details"><span>Hypha Group</span><span>hypha.group ↗</span></span></a>
+        <a href="https://centerforairesearch.org/" class="partner-card"><span class="partner-logo"><img class="caair-logo" src="/partners/caair-logo.png" alt="Center for Agentic AI Research logo" /></span><span class="partner-details"><span>CAAIR</span><span>centerforairesearch.org ↗</span></span></a>
       </div>
     </section>
   </main>
@@ -581,6 +582,8 @@ const { showPrinciples = true } = Astro.props;
   .partner-logo .reset-logo { width: 160px; }
   .partner-logo .aspiration-logo { height: 96px; width: auto; }
   .partner-logo .hypha-logo { width: 96px; height: 96px; }
+  /* The CAAIR mark is published white on transparent; darken it for our white logo panel. */
+  .partner-logo .caair-logo { width: 96px; height: 96px; filter: brightness(0); }
   .partner-details { display: flex; flex-direction: column; gap: 6px; padding: 20px 24px 24px; }
   .partner-details span:first-child { font: 30px/1.1 var(--font-display); }
   .partner-details span:last-child { font: 13px var(--font-mono); }
