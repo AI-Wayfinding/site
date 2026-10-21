@@ -134,7 +134,7 @@ test('skip link, quote label and disclosures remain in place', () => {
   assert.match(home, /<main id="top" tabindex="-1">/);
   assert.match(home, /\.skip-link:focus/);
   assert.match(home, /id="copy-status"[^>]*role="status"/);
-  assert.match(home, /Published with permission; names withheld\./);
+  assert.doesNotMatch(home, /Published with permission/);
   assert.match(home, /#pause-quotes\[hidden\] \{ display: none; \}/);
   assert.match(home, /Register interest in the peer network/);
   assert.doesNotMatch(home, /Join other wayfinders/);
