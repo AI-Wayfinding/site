@@ -50,7 +50,7 @@ const { showPrinciples = true } = Astro.props;
     <section id="start" class="start-section panel" aria-labelledby="start-heading">
       <div class="wrap start-grid">
         <div class="stack">
-          <p class="eyebrow accent">Three ways in</p>
+          <p class="eyebrow accent">Two ways in</p>
           <h2 id="start-heading">How can we help?</h2>
           <p class="section-intro">Most teams we talk to are curious and cautious at once. You don't have to work it out alone. Pick the way in that fits; you can switch later.</p>
           <h3 class="option-heading"><span>1</span>With your agent</h3>
@@ -58,7 +58,7 @@ const { showPrinciples = true } = Astro.props;
           <ul class="benefits" aria-label="What you get">
             <li><span aria-hidden="true">→</span>Your first position: an interview run by your agent, written up as a short sensemaking document that shows where you stand today.</li>
             <li><span aria-hidden="true">→</span>A guide for interviewing a teammate, so you can compare positions and begin making sense of AI together.</li>
-            <li><span aria-hidden="true">→</span>It stays yours. Your interview answers are not sent to Wayfinding unless you choose to add or share them. You decide what to keep and what to share.</li>
+            <li><span aria-hidden="true">→</span>It stays yours. Your interview answers are not sent to Wayfinding. You decide what to keep and what to share.</li>
           </ul>
         </div>
         <div class="prompt-box">
@@ -68,15 +68,9 @@ const { showPrinciples = true } = Astro.props;
           <a href="/agents/start.md">Read the instructions first →</a>
         </div>
       </div>
-      <div id="journey" class="wrap facilitator-wrap">
-        <div class="facilitator-box">
-          <div class="stack small-stack"><h3 class="option-heading"><span>2</span>On your own</h3></div>
-          <div class="stack facilitator-copy"><p class="body-copy">No agent needed. Keep your notes, interviews and decisions in an encrypted journey for yourself or your team. Content is encrypted on your device before we store it.</p><a class="button button-primary" href="https://app.wayfinding.support">Open a private space →</a></div>
-        </div>
-      </div>
       <div id="facilitator" class="wrap facilitator-wrap">
         <div class="facilitator-box">
-          <div class="stack small-stack"><h3 class="option-heading"><span>3</span>With a person to guide you</h3></div>
+          <div class="stack small-stack"><h3 class="option-heading"><span>2</span>With a person to guide you</h3></div>
           <div class="stack facilitator-copy"><p class="body-copy">No agent needed. A facilitator from one of our partner organisations can lead your team through listening, weighing options and a first decision.</p><button class="button button-primary contact-trigger" type="button" data-contact-topic="facilitator">Talk to someone →</button><p class="body-copy">Or email <a href="mailto:hello@wayfinding.support">hello@wayfinding.support</a>.</p></div>
         </div>
       </div>
@@ -171,7 +165,6 @@ const { showPrinciples = true } = Astro.props;
         <div class="stack wayfinders-copy">
           <div class="button-row">
             <a class="button button-primary" href="#start">Try it with your agent</a>
-            <a class="button button-outline" href="https://app.wayfinding.support">Open a private space</a>
             <button class="button button-outline contact-trigger" type="button" data-contact-topic="facilitator">Talk to someone</button>
           </div>
           <p class="body-copy">Want to hear when the peer network opens? <button class="link-button contact-trigger" type="button" data-contact-topic="join">Register interest in the peer network →</button></p>
@@ -467,7 +460,6 @@ const { showPrinciples = true } = Astro.props;
   .option-heading { display: flex; align-items: baseline; gap: 14px; }
   .option-heading span { color: var(--accent); font: 15px var(--font-mono); }
   .start-grid .option-heading { margin-top: 12px; font-size: 40px; line-height: 1.05; }
-  #journey { padding-bottom: 24px; }
   .link-button { border: 0; padding: 0; background: none; color: inherit; font: inherit; text-decoration: underline; cursor: pointer; }
   .link-button:hover { color: var(--accent); }
   .facilitator-box h3 { font-size: 40px; line-height: 1.05; }

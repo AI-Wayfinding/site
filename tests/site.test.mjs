@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
@@ -142,9 +142,16 @@ test('skip link, quote label and disclosures remain in place', () => {
   assert.match(home, /Your answers go to your own AI provider, under its terms\./);
   assert.match(source('public/agents/start.md'), /Your answers go to your own AI provider, under its terms\./);
   assert.doesNotMatch(home, /Agent links are an exception/);
-  for (const path of ['public/agents/install.md', 'public/agents/start.md']) {
+});
+
+test('nothing refers to the retired journey app', () => {
+  const paths = ['src/pages/index.astro', 'src/components/Footer.astro', 'public/_headers',
+    ...readdirSync(new URL('../public/agents/', import.meta.url)).map((name) => 'public/agents/' + name)];
+  for (const path of paths) {
     const text = source(path);
-    assert.match(text, /Agent links are an exception/);
-    assert.match(text, /server still sees details such as who is in a journey and when/);
+    assert.doesNotMatch(text, /app\.wayfinding\.support/, path);
+    assert.doesNotMatch(text, /install\.md|@ai-wayfinding\/client|relay-test/, path);
+    assert.doesNotMatch(text, /\bjourney\b/i, path);
   }
+  assert.equal(existsSync(new URL('../public/agents/install.md', import.meta.url)), false);
 });
